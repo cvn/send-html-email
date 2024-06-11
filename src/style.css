@@ -1,0 +1,219 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: sans-serif;
+}
+pre {
+    white-space: pre-wrap;
+}
+.container {
+    max-width: 1000px;
+    margin: auto;
+    margin-bottom: 100px;
+}
+
+.alert {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+.alert.error {
+    background-color: #fdd;
+    border: 1px solid #f00;
+}
+.alert.success {
+    background-color: #dfd;
+    border: 1px solid #0f0;
+}
+
+.service {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #eee;
+    border-radius: 5px;
+}
+.bordered {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+.form-row {
+    padding: 10px;
+    display: flex;
+}
+.form-row + .form-row {
+    border-top: 1px solid #ccc;
+}
+.form-row input, .form-row textarea {
+    width: 100%;
+    font-size: 1rem;
+    font-family: sans-serif;
+    padding: 1px 2px;
+    flex: 1 1;
+    border: 0;
+}
+.form-row input:not([type="file"]), .form-row textarea, .chonk {
+    outline: none;
+}
+.form-row label {
+    color: #999;
+    margin-right: 10px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.info {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 5px;
+    margin-left: 11px;
+}
+
+.preview {
+    display: block;
+    resize: both;
+    width: 100%;
+    height: 300px;
+}
+.preview[src=""] {
+    display: none;
+}
+
+
+/**
+ * Chonk button
+ */
+
+.chonk-container {
+    display: inline-block;
+    perspective: 200px;
+    perspective-origin: 200px 150px;
+    margin: 15px;
+}
+.chonk {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 0;
+    background-color: #f00;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+.chonk::before, .chonk::after {
+    content: '';
+    position: absolute;
+    transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.chonk::before {
+    background: #c00;
+    top: 0;
+    left: 100%;
+    height: 100%;
+    transform: rotate3d(0, 1, 0, 90deg);
+    transform-origin: 0 0;
+}
+.chonk::after {
+    background: #900;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    transform: rotate3d(1, 0, 0, -90deg);
+    transform-origin: 0 0;
+}
+.chonk-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    outline-offset: 3px;
+    outline-color: #005fcc;
+}
+
+.chonk:focus-visible + .chonk-shadow {
+    outline-style: auto;
+}
+.chonk:disabled {
+    cursor: not-allowed;
+}
+/* 
+.chonk:disabled {
+    background: #ffabab;
+}
+.chonk:disabled::before {
+    background: #cc8989;
+}
+.chonk:disabled::after {
+    background: #996767;
+}
+*/
+
+.chonk {
+    transform: translateZ(10px);
+}
+.chonk::before {
+    width: 10px;
+}
+.chonk::after {
+    height: 10px;
+}
+.chonk-shadow {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4), 0 2px 7px rgba(0, 0, 0, 0.5);
+    background: #f00; /* hide seams in safari */
+}
+
+
+.chonk:hover {
+    transform: scaleZ(1.5) translateZ(10px);
+}
+.chonk:hover + .chonk-shadow {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+.chonk:active, .chonk.active {
+    transform: scaleZ(0.2) translateZ(10px);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.chonk:active::before, .chonk.active::before, .chonk:active::after, .chonk.active::after {
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.chonk:active + .chonk-shadow, .chonk.active + .chonk-shadow {
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4), 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+
+/**
+ * Emoji Clock Spinner
+ */
+
+.spinner::before {
+    content: '';
+    display: inline-block;
+    animation: spin 1s infinite steps(12);
+}
+@keyframes spin {
+      0% { content: '🕛'; }
+      8% { content: '🕐'; }
+     17% { content: '🕑'; }
+     25% { content: '🕒'; }
+     33% { content: '🕓'; }
+     42% { content: '🕔'; }
+     50% { content: '🕕'; }
+     58% { content: '🕖'; }
+     67% { content: '🕗'; }
+     75% { content: '🕘'; }
+     83% { content: '🕙'; }
+     92% { content: '🕚'; }
+    100% { content: '🕛'; }
+}
+.hide {
+    display: none;
+}
